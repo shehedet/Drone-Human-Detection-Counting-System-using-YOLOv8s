@@ -20,62 +20,11 @@ This project fine-tunes a YOLOv8s model on the VisDrone2019 detection dataset to
 
 Kaggle dataset: https://www.kaggle.com/datasets/banuprasadb/visdrone-dataset
 
-After downloading, place the dataset in the project root:
-
-```
-VisDrone_Dataset/
-├── VisDrone2019-DET-train/
-│   ├── images/
-│   └── labels/
-├── VisDrone2019-DET-val/
-│   ├── images/
-│   └── labels/
-├── VisDrone2019-DET-test-dev/
-│   ├── images/
-│   └── labels/
-└── visdrone.yaml
-```
-
 **Dataset stats:**
 - Train: 6,471 images
 - Val: 548 images
 - Test: 1,610 images
 - Classes: pedestrian, people, bicycle, car, van, truck, tricycle, awning-tricycle, bus, motor
-
----
-
-## Setup
-
-```bash
-pip install ultralytics opencv-python matplotlib pyyaml torch
-```
-
-Requires Python 3.8+ and a CUDA-capable GPU for training. Inference runs on CPU as well.
-
----
-
-## Usage
-
-All tasks are contained in a single notebook:
-
-```
-yolov8s_training_testing.ipynb
-```
-
-Run cells top to bottom. The notebook is organized into five sections matching the task structure:
-
-- **Task 1** — Dataset EDA and visualization
-- **Task 2** — Model training
-- **Task 3** — Human & car detection with counting
-- **Task 4** — Object tracking with ByteTrack
-- **Task 5** — Evaluation and metrics
-
-Before running inference/evaluation cells, update the path variables in Cell 11 to match your local YOLO run directory:
-
-```python
-BEST_PT_PATH  = r"runs\detect\...\weights\best.pt"
-TRAIN_PROJECT = r"runs\detect\...\training"
-```
 
 ---
 
@@ -130,28 +79,6 @@ Car detection is strongest due to its consistent aerial appearance and large rep
 
 All generated outputs are saved under `yolov8s_outputs/`:
 
-```
-yolov8s_outputs/
-├── task1_dataset_eda/
-│   ├── class_distribution.png
-│   ├── sample_images_raw.png
-│   └── sample_images_with_gt_boxes.png
-├── task2_training/
-│   ├── training_curves.png
-│   └── validation_sample_predictions.png
-├── task3_detection/
-│   ├── detection_demo_single.png
-│   ├── detection_results_grid.png
-│   └── detections/
-├── task4_tracking/
-│   ├── tracking_grid.png
-│   └── bytetrack_output/
-└── task5_evaluation/
-    ├── per_class_ap50.png
-    ├── confusion_matrix_normalized.png
-    └── evaluation_report.txt
-```
-
 ---
 
 ## Limitations
@@ -160,10 +87,3 @@ yolov8s_outputs/
 - The two human classes (pedestrian and people) are visually identical from above and are frequently confused with each other
 - Tracking was demonstrated on sorted still images rather than a true video sequence
 - Rare classes (bicycle, awning-tricycle) would benefit from oversampling or class-weighted loss
-
----
-
-## Acknowledgements
-
-- [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics)
-- [VisDrone Dataset](http://aiskyeye.com/)
